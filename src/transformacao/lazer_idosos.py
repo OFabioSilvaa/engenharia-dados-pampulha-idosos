@@ -1,8 +1,6 @@
 import pandas as pd
 
-# ===============================
-# 1. Leitura dos dados
-# ===============================
+# Leitura do arquivo original da pesquisa
 arquivo = "data/raw/pampulha_moradores_b.csv"
 
 df = pd.read_csv(
@@ -12,7 +10,7 @@ df = pd.read_csv(
     on_bad_lines='skip'
 )
 
-# Padronização de colunas
+# Padroniza os nomes das colunas
 df.columns = (
     df.columns
     .str.strip()
@@ -20,32 +18,24 @@ df.columns = (
     .str.replace(" ", "_")
 )
 
-# ===============================
-# 2. Filtra apenas idosos
-# ===============================
+# Filtra apenas os respondentes com 60 anos ou mais
 df_idosos = df[df['faixaidade'] == 'Com 60 anos ou mais']
 
-# ===============================
-# 3. Seleciona colunas de lazer
-# ===============================
+# Colunas que representam preferências de lazer
 colunas_lazer = [
     col for col in df_idosos.columns
     if col.startswith('principaispreferenciaslazer')
 ]
 
-# ===============================
-# 4. Transforma wide → long
-# ===============================
+# Transforma as respostas múltiplas em formato long
 lazer_long = df_idosos[colunas_lazer].melt(
     value_name='tipo_lazer'
 )
 
-# Remove valores vazios
+# Remove respostas vazias
 lazer_long = lazer_long.dropna()
 
-# ===============================
-# 5. Ranking de preferências
-# ===============================
+# Gera o ranking de preferências
 ranking_lazer = lazer_long['tipo_lazer'].value_counts()
 
 print("\nRanking de preferências de lazer dos idosos:")

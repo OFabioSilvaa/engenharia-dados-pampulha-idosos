@@ -100,16 +100,7 @@ engenharia-dados-pampulha-idosos/
 
 ---
 
-## 7. Próximos Passos
-
-* Criação de dashboards (Power BI / Looker Studio)
-* Evolução para processamento distribuído (PySpark)
-* Integração com bancos de dados
-* Storytelling e publicação de análises no LinkedIn
-
----
-
-## 8. Aprendizados
+## 7. Aprendizados
 
 Este projeto **reproduz desafios reais** enfrentados por Engenheiros de Dados, incluindo:
 
